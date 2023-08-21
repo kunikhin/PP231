@@ -3,13 +3,13 @@ package org.example.model;
 
 import javax.persistence.*;
 
-@Entity //Т.е. этот класс будет отображаться в БД в виде таблицы
-@Table(name = "users")//указываем, к какой именно таблице мы привязываем класс
+@Entity
+@Table(name = "users")
 public class User {
 
-    // @Column не указываем, т.к. названия столбцов совпадают с названиями таблицы в БД
-    @Id // Этой аннотацией помечаем, что поле Id - primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // описывает стратегию по генерации значений д/столбца Id.
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;

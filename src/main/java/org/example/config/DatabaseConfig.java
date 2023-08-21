@@ -1,6 +1,5 @@
 package org.example.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +13,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement //означает, что классы, помеченные @Transactional, должны быть обернуты аспектом транзакций.
+@EnableTransactionManagement
 @ComponentScan("org.example")
 public class DatabaseConfig {
 
-    //DataSource используется для получения физического соединения с БД. Это альтернатива DriverManager
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -29,7 +27,6 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    //Создание SessionFactory - фабрика по производству сессий
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -45,7 +42,6 @@ public class DatabaseConfig {
         return factoryBean;
     }
 
-    //HibernateTransactionManager автоматически открывает транзакцию Hibernate
     @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();

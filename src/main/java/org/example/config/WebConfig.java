@@ -15,25 +15,19 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-// Интерфейс WebMvcConfigurer реализуется тогда, когда мы под себя хотим реализовать Spring MVC.
-// В данном случае, мы вместо стандартного шаблонизатора хотим использовать thymeleaf (таймлИф), поэтому мы имплементим этот интерфейс
-
-//Этот класс - замена файлу с описанием ДиспетчерСервлета. Теперь вся конфигурация ДиспетчерСервлета будет в этом классе.
 @Configuration
-@EnableWebMvc //Перевод - "делать возможным WebMvc", т.е. используется для включения Spring MVC в приложении
+@EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("org.example")
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
-    @Autowired // Внедряем applicationContext, как зависимость)
+    @Autowired
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
-
-    //Ресурс распознавателя шаблонов
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -46,8 +40,6 @@ public class WebConfig implements WebMvcConfigurer {
         return templateResolver;
     }
 
-
-    //Двигатель шаблонов
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -56,8 +48,6 @@ public class WebConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
-
-    // Здесь мы задаем шаблонизатор - распознаватель вьюшек. В данном случае - thymeleaf (таймлИф)
 
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();

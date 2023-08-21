@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-
-<!-- Ниже строчка, которая указывает, что мы используем таймлиф -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Все пользователи</title>
+  <title>Users</title>
 </head>
 <body>
+<h2>User list</h2>
+<br>
+<div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
 
-<!-- это подобие foreach. Здесь user - временная переменная, а ${allUsers} - это контейнер,
-а его имя - это ключ из контроллера. На выходе будет список имен, но в них заложена ссылка со значением id.
-При нажатии будет переход на view "id". А >user< будет динамически меняться  -->
-<div th:each="user : ${users}">
-  <a th:href="@{/users/{id} (id=${user.getId()})}" th:text="${user.getName()}">user</a>
+    </tr>
 
+    <tr th:each="user : ${users}">
+
+      <td th:utext="${user.getName()}"></td>
+      <td th:utext="${user.getSurname()}"></td>
+
+      <td>
+        <button type="submit">
+          <a th:href="@{/users/{id} (id=${user.getId()})}">Details</a>
+        </button>
+      </td>
+      <td>
+        <button type="submit">
+          <a th:href="@{/edit(id=${user.getId()})}">Update</a>
+        </button>
+      </td>
+      <td>
+        <form th:method="DELETE" th:action="@{/users/{id} (id = ${user.getId()})}">
+          <input type = "submit" value = "Delete"/>
+        </form>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <input type="button" value="Add User"
+         onclick="window.location.href = 'users/new'">
 </div>
-
-<br/> <!--Это пустая строка, это отступ-->
-<hr/> <!--Это горизонтальная линия-->
-
-<!-- Это ссылка, при нажатии на которую будет перенаправление по адресу /users/new,
-где будет форма д/создания нового юзера-->
-<a th:href="/users/new">Создать нового пользователя</a>
-
-
-
 </body>
 </html>

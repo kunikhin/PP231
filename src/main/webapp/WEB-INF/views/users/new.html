@@ -1,44 +1,30 @@
 <!DOCTYPE html>
 
-<!-- Ниже строчка, которая указывает, что мы используем таймлиф -->
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
-  <title>Новый пользователь</title>
+  <title>New user</title>
 </head>
 <body>
 
-<!-- th:action - это то, куда форма будет передавать свои данные, т.е. в данном случае просто на контроллер, но т.к. это POST-запрос,
- то он перейдет на метод с аннотацией @PostMapping()
-а именно в атрибуте th:object мы передаем объект user, т.е. это объект под ключом user,
-который мы положили в модель в методе newUser.
-Label (метка) нужна д/того, чтобы пользователь знал, какое значение вводить в поле -->
-
-<!--  Здесь мы видим форму. И th:object="${user}" - это тот объект, который эта форма принимает на вход.
- Т.е. в методе newUser создается пустой объект User, помещается в модель и передается в эту форму, которая имеет доступ к его полям.
- th:field="*{name}" , th:field="*{surname}"  , th:field="*{age}"  - это те поля, которые будут заполнены -->
-
-<!-- th:method="POST" - это то, на какой http-метод будет отправляться эта форма, т.е. она будет отправлена
-на метод с аннотацией @PostMapping(), т.е. на метод addUser -->
 
 <form th:method="POST" th:action="@{/users}" th:object="${user}">
 
-  <label for="name"> Введите имя: </label>  <!-- Эта метка для input, id которого "name"-->
-  <input type="text" th:field="*{name}" id="name" />  <!-- input - это поле д/ввода -->
-  <br/> <!--Это пустая строка-->
+  <label for="name"> Input name: </label>
+  <input type="text" th:field="*{name}" id="name" />
+  <br/>
 
-  <label for="surname"> Введите фамилию: </label>  <!-- Эта метка для input, id которого "name"-->
+  <label for="surname"> Input surname: </label>
   <input type="text" th:field="*{surname}" id="surname" />
-  <br/> <!--Это пустая строка-->
+  <br/>
 
-  <label for="age"> Введите возраст: </label>  <!-- Эта метка для input, id которого "name"-->
+  <label for="age"> Input age: </label>
   <input type="number" th:field="*{age}" id="age"/>
-  <br/> <!--Это пустая строка-->
+  <br/>
 
-  <input type="submit" value="Создать нового пользователя"/> <!--Это кнопка, нажав которую мы
-     данные с этой формы отправим post-запросом на адрес /users. А в контроллере в методе newUser
-     будут назначены значения полям объекту User user-->
+  <input type="submit" value="Confirm new user"/>
 
 </form>
 </body>
